@@ -20,7 +20,6 @@ const App = () => {
       const resJson: Emoji[] = await res.json()
 
       setEmojiList(resJson)
-      console.log(emojiList[0])
     })()
   }, [])
 
