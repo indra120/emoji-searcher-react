@@ -1,0 +1,20 @@
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: var(--main-background-color);
+  padding: 0 16px;
+  height: 55px;
+}
+
+.title {
+  color: var(--secondary-font-color);
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.icon {
+  height: 32px;
+  width: 32px;
+}
