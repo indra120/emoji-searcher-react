@@ -4,6 +4,8 @@ const App = () => {
   return (
     <>
       <Header />
+
+      <main className="container"></main>
     </>
   )
 }
