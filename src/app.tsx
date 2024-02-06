@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import Header from "./components/header"
 import EmojiLists from "./components/emoji-lists"
+import Empty from "./components/empty"
 
 const API_URL = "https://run.mocky.io/v3/5a982f64-218d-45d7-a380-ebe924d55631"
 
@@ -13,13 +14,22 @@ export interface Emoji {
 const App = () => {
   const [emojiList, setEmojiList] = useState<Emoji[]>([])
   const [search, setSearch] = useState<string>("")
+  const [loading, setLoading] = useState<boolean>(false)
+  const [error, setError] = useState<boolean>(false)
 
   useEffect(() => {
     ;(async function () {
-      const res = await fetch(API_URL)
-      const resJson: Emoji[] = await res.json()
-
-      setEmojiList(resJson)
+      try {
+        setLoading(true)
+        const res = await fetch(API_URL)
+        const resJson: Emoji[] = await res.json()
+        setEmojiList(resJson)
+      } catch (error) {
+        console.error(error)
+        setError(true)
+      } finally {
+        setLoading(false)
+      }
     })()
   }, [])
 
@@ -36,7 +46,12 @@ const App = () => {
           onChange={(e) => setSearch(e.target.value)}
         />
 
-        <EmojiLists emojiList={emojiList} search={search} />
+        {loading && <Empty text="Loading..." />}
+        {error && <Empty text="Error!" />}
+        
+        {emojiList.length > 0 && (
+          <EmojiLists emojiList={emojiList} search={search} />
+        )}
       </main>
     </>
   )
