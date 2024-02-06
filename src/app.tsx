@@ -4,6 +4,7 @@ import EmojiLists from "./components/emoji-lists"
 import Empty from "./components/empty"
 
 const API_URL = "https://run.mocky.io/v3/5a982f64-218d-45d7-a380-ebe924d55631"
+const LOCAL_STORAGE_KEY = "emoji-list"
 
 export interface Emoji {
   title: string
@@ -21,9 +22,18 @@ const App = () => {
     ;(async function () {
       try {
         setLoading(true)
+
+        const savedList = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)!) || []
+        if (savedList.length > 0) {
+          setEmojiList(savedList)
+          return
+        }
+
         const res = await fetch(API_URL)
         const resJson: Emoji[] = await res.json()
+
         setEmojiList(resJson)
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(resJson))
       } catch (error) {
         console.error(error)
         setError(true)
@@ -48,7 +58,7 @@ const App = () => {
 
         {loading && <Empty text="Loading..." />}
         {error && <Empty text="Error!" />}
-        
+
         {emojiList.length > 0 && (
           <EmojiLists emojiList={emojiList} search={search} />
         )}
