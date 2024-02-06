@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
 import Header from "./components/header"
+import EmojiLists from "./components/emoji-lists"
 
 const API_URL = "https://run.mocky.io/v3/5a982f64-218d-45d7-a380-ebe924d55631"
 
-interface Emoji {
+export interface Emoji {
   title: string
   symbol: string
   keywords: string
@@ -35,6 +36,8 @@ const App = () => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
+
+        <EmojiLists emojiList={emojiList} search={search} />
       </main>
     </>
   )
