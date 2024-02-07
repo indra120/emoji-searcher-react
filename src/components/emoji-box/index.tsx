@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react"
 import styles from "./emoji-box.module.css"
-import { Emoji } from "../../app"
+import type { Emoji } from "@/app"
 
-type EmojiBoxProps = Omit<Emoji, "keywords">
+type Props = Omit<Emoji, "keywords">
 
-const EmojiBox: React.FC<EmojiBoxProps> = (props) => {
+const EmojiBox: React.FC<Props> = (props) => {
   const [selected, setSelected] = useState<boolean>(false)
 
   useEffect(() => {
@@ -27,9 +27,7 @@ const EmojiBox: React.FC<EmojiBoxProps> = (props) => {
         }}
       />
       
-      <p
-        className={`${styles.emojiText} ${selected ? styles.selectedText : ""}`}
-      >
+      <p className={`${styles.emojiText} ${selected ? styles.selectedText : ""}`}>
         {selected ? "Copied!" : props.title}
       </p>
     </div>

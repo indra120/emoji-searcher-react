@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react"
 import styles from "./emoji-lists.module.css"
-import EmojiBox from "../emoji-box"
-import Empty from "../empty"
-import { Emoji } from "../../app"
-import { SearchEmojiParams, searchEmoji } from "../../utils/searchEmoji"
+import EmojiBox from "@/components/emoji-box"
+import Empty from "@/components/empty"
+import { type SearchEmojiParams, searchEmoji } from "@/utils/searchEmoji"
+import type { Emoji } from "@/app"
 
-type EmojiListsProps = Omit<SearchEmojiParams, "maxResults">
+type Props = Omit<SearchEmojiParams, "maxResults">
 
-const EmojiLists: React.FC<EmojiListsProps> = (props) => {
+const EmojiLists: React.FC<Props> = (props) => {
   const [searchResult, setSearchResult] = useState<Emoji[]>([])
 
   useEffect(() => {

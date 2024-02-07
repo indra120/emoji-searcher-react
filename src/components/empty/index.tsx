@@ -1,11 +1,11 @@
 import styles from "./empty.module.css"
 
-interface EmptyProps {
+interface Props {
   text: string
 }
 
-const Empty: React.FC<EmptyProps> = (props) => (
-  <div className={styles.empty}>{props.text}</div>
+const Empty: React.FC<Props> = ({ text }) => (
+  <div className={styles.empty}>{text}</div>
 )
 
 export default Empty

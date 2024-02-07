@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react"
-import Header from "./components/header"
-import EmojiLists from "./components/emoji-lists"
-import Empty from "./components/empty"
+import Header from "@/components/header"
+import EmojiLists from "@/components/emoji-lists"
+import Empty from "@/components/empty"
 
 const API_URL = "https://run.mocky.io/v3/5a982f64-218d-45d7-a380-ebe924d55631"
-const LOCAL_STORAGE_KEY = "emoji-list"
 
 export interface Emoji {
   title: string
@@ -23,7 +22,7 @@ const App = () => {
       try {
         setLoading(true)
 
-        const savedList = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)!) || []
+        const savedList = JSON.parse(localStorage.getItem("emoji-list")!) || []
         if (savedList.length > 0) {
           setEmojiList(savedList)
           return
@@ -33,7 +32,7 @@ const App = () => {
         const resJson: Emoji[] = await res.json()
 
         setEmojiList(resJson)
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(resJson))
+        localStorage.setItem("emoji-list", JSON.stringify(resJson))
       } catch (error) {
         console.error(error)
         setError(true)
@@ -48,20 +47,12 @@ const App = () => {
       <Header />
 
       <main className="container">
-        <input
-          type="text"
-          className="search"
-          placeholder="Search"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+        <input value={search} onChange={(e) => setSearch(e.target.value)} type="text" className="search" placeholder="Search" />
 
         {loading && <Empty text="Loading..." />}
         {error && <Empty text="Error!" />}
 
-        {emojiList.length > 0 && (
-          <EmojiLists emojiList={emojiList} search={search} />
-        )}
+        {emojiList.length > 0 && <EmojiLists emojiList={emojiList} search={search} />}
       </main>
     </>
   )

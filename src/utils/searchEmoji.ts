@@ -1,4 +1,4 @@
-import { Emoji } from "../app"
+import type { Emoji } from "@/app"
 
 export interface SearchEmojiParams {
   emojiList: Emoji[]
