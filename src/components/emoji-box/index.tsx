@@ -2,10 +2,8 @@ import { useState, useEffect } from "react"
 import styles from "./emoji-box.module.css"
 import type { Emoji } from "@/app"
 
-type Props = Omit<Emoji, "keywords">
-
-const EmojiBox: React.FC<Props> = (props) => {
-  const [selected, setSelected] = useState<boolean>(false)
+const EmojiBox = (props: Omit<Emoji, "keywords">) => {
+  const [selected, setSelected] = useState(false)
 
   useEffect(() => {
     const timer = setTimeout(() => setSelected(false), 600)

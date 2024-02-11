@@ -5,9 +5,7 @@ import Empty from "@/components/empty"
 import { type SearchEmojiParams, searchEmoji } from "@/utils/searchEmoji"
 import type { Emoji } from "@/app"
 
-type Props = Omit<SearchEmojiParams, "maxResults">
-
-const EmojiLists: React.FC<Props> = (props) => {
+const EmojiLists = (props: Omit<SearchEmojiParams, "maxResults">) => {
   const [searchResult, setSearchResult] = useState<Emoji[]>([])
 
   useEffect(() => {

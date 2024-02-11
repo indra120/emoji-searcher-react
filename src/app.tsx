@@ -13,9 +13,9 @@ export interface Emoji {
 
 const App = () => {
   const [emojiList, setEmojiList] = useState<Emoji[]>([])
-  const [search, setSearch] = useState<string>("")
-  const [loading, setLoading] = useState<boolean>(false)
-  const [error, setError] = useState<boolean>(false)
+  const [search, setSearch] = useState("")
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
 
   useEffect(() => {
     ;(async function () {
