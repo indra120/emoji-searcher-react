@@ -5,11 +5,7 @@ import Empty from "@/components/empty"
 
 const API_URL = "https://run.mocky.io/v3/5a982f64-218d-45d7-a380-ebe924d55631"
 
-export interface Emoji {
-  title: string
-  symbol: string
-  keywords: string
-}
+export type Emoji = Record<"title" | "symbol" | "keywords", string>
 
 const App = () => {
   const [emojiList, setEmojiList] = useState<Emoji[]>([])
@@ -24,8 +20,7 @@ const App = () => {
 
         const savedList = JSON.parse(localStorage.getItem("emoji-list")!) || []
         if (savedList.length > 0) {
-          setEmojiList(savedList)
-          return
+          return setEmojiList(savedList)
         }
 
         const res = await fetch(API_URL)
